@@ -1,13 +1,14 @@
 import React from 'react';
 import Constants from 'expo-constants';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable, Text } from 'react-native';
 import RepositoryList from './RepositoryList';
+
+import AppBar from './AppBar';
 
 import Heading from './Textual/Heading';
 
 const styles = StyleSheet.create({
 	container: {
-		marginTop: Constants.statusBarHeight,
 		flexGrow: 1,
 		flexShrink: 1,
 	},
@@ -15,10 +16,18 @@ const styles = StyleSheet.create({
 
 const Main = () => {
 	return (
-		<View style={styles.container}>
-			<Heading>Rate repository Application</Heading>
-			<RepositoryList/>
+		<View>
+			<AppBar>
+				<Pressable onClick={() => console.log('test')}>
+					<Text>Test</Text>
+				</Pressable>
+			</AppBar>
+			<View style={styles.container}>
+				<Heading>Rate repository Application</Heading>
+				<RepositoryList/>
+			</View>
 		</View>
+		
 	);
 };
 
