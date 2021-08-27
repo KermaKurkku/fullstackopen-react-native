@@ -1,10 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
-import Text from './Textual/Text';
+import { View, StyleSheet } from 'react-native';
+import Text from '../Text';
+
+
+const styles = StyleSheet.create({
+	
+})
 
 const RepositoryItem = ({item}) => {
 	return (
 		<View>
+
 			<Text fontWeight='bold'>Full Name: {item.fullName}</Text>
 			<Text>Description: {item.description}</Text>
 			<Text>Language: {item.language}</Text>

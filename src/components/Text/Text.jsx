@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
 	colorPrimary: {
 		color: theme.colors.primary,
 	},
+	colorInverted: {
+		color: theme.colors.textInverted,
+	},
 	fontSizeSubheading: {
 		fontSize: theme.fontSizes.subheading,
 	},
@@ -30,6 +33,7 @@ const styles = StyleSheet.create({
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
 	const textStyle = [
 		styles.text,
+		color == 'textInverted' && styles.colorInverted,
 		color == 'textSecondary' && styles.colorTextSecondary,
 		color == 'primary' && styles.colorPrimary,
 		fontSize == 'subheading' && styles.fontSizeSubheading,

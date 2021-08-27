@@ -1,9 +1,8 @@
 import React from 'react';
-import Text from 'Text';
+import Text from './Text';
 
 
-const Subheading = (props) => {
+export const Subheading = (props) => {
 	return <Text fontWeight='bold' fontSize='subheading' {...props}/>;
 };
 
-export default Subheading;

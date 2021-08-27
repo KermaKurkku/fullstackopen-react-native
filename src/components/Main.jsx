@@ -1,11 +1,10 @@
 import React from 'react';
-import Constants from 'expo-constants';
-import { StyleSheet, View, Pressable, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
 
 import AppBar from './AppBar';
 
-import Heading from './Textual/Heading';
+import { Heading } from './Text';
 
 const styles = StyleSheet.create({
 	container: {
@@ -17,11 +16,7 @@ const styles = StyleSheet.create({
 const Main = () => {
 	return (
 		<View>
-			<AppBar>
-				<Pressable onClick={() => console.log('test')}>
-					<Text>Test</Text>
-				</Pressable>
-			</AppBar>
+			<AppBar/>
 			<View style={styles.container}>
 				<Heading>Rate repository Application</Heading>
 				<RepositoryList/>
