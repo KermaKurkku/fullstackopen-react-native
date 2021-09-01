@@ -5,6 +5,8 @@ const theme = {
     textInverted: '#FFFFFF',
     primary: '#0366d6',
     appBar: '#24292e',
+		cardBack: '#FFFFFF',
+		separatorBack: '#E1E4E8'
   },
   fontSizes: {
     body: 14,

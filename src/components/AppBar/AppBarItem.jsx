@@ -6,7 +6,7 @@ import Text from '../Text';
 const style = StyleSheet.create({
 	item: {
 		flexGrow: 0,
-		padding: 15,
+		padding: 20,
 	},
 });
 
