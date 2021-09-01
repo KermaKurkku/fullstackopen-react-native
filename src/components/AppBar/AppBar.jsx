@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { Link } from 'react-router-native';
 import Constants from 'expo-constants';
+
 import AppBarItem from './AppBarItem';
 
 
@@ -18,7 +20,8 @@ const styles = StyleSheet.create({
 const AppBar = () => {
 	return (
 		<View style={styles.container}>
-			<AppBarItem>Repositories</AppBarItem>
+				<AppBarItem to='/'>Repositories</AppBarItem>
+				<AppBarItem to='/signIn'>Sign in</AppBarItem>
 		</View>
 	);
 };

@@ -1,25 +1,24 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { Route, Switch, Redirect } from 'react-router-native';
+
 import RepositoryList from './RepositoryList';
-
 import AppBar from './AppBar';
-
-import { Heading } from './Text';
-
-const styles = StyleSheet.create({
-	container: {
-		flexGrow: 1,
-		flexShrink: 1,
-	},
-});
+import SignIn from './SignIn'
 
 const Main = () => {
 	return (
 		<View>
 			<AppBar/>
-			<View style={styles.container}>
-				<RepositoryList/>
-			</View>
+			<Switch>
+				<Route path='/' exact>
+					<RepositoryList/>
+				</Route>
+				<Route path='/signIn' exact>
+					<SignIn/>
+				</Route>
+				<Redirect to='/' />
+			</Switch>
 		</View>
 		
 	);

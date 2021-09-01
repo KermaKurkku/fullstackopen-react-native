@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
+import { Link } from 'react-router-native'
 
 import Text from '../Text';
 
@@ -7,17 +8,16 @@ const style = StyleSheet.create({
 	item: {
 		flexGrow: 0,
 		padding: 20,
+		borderRadius: 10,
 	},
 });
 
-export const AppBarItem = (props) => {
+export const AppBarItem = ({to, children}) => {
+	console.log(children)
 	return (
-		<View style={style.item}>
-			<Pressable onPress={() => console.log('test')}>
-				<Text fontWeight='bold' fontSize='subheading' color='textInverted' {...props}/>
-			</Pressable>
-			
-		</View>
+			<Link to={to} style={style.item}>
+				<Text fontWeight='bold' fontSize='subheading' color='textInverted'>{children}</Text>
+			</Link>
 	);
 };
 
