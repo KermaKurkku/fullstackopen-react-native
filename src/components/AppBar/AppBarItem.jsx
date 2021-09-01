@@ -13,7 +13,6 @@ const style = StyleSheet.create({
 });
 
 export const AppBarItem = ({to, children}) => {
-	console.log(children)
 	return (
 			<Link to={to} style={style.item}>
 				<Text fontWeight='bold' fontSize='subheading' color='textInverted'>{children}</Text>
