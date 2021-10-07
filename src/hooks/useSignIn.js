@@ -6,10 +6,10 @@ const useSignIn = () => {
 	const [mutate, result] = useMutation(SIGN_IN);
 
 	const signIn = async ({ username, password }) => {
-		return mutate({ variables: { username: username, password: password } })
+		return mutate({ variables: { username: username, password: password } });
 	}
 
-	return [signIn , result]
+	return [signIn , result];
 }
 
 export default useSignIn;

@@ -8,6 +8,8 @@ import { FormikTextInput } from './TextInput';
 import theme from '../theme';
 import useSignIn from '../hooks/useSignIn';
 
+import AuthStorage from '../utils/authStorage'
+
 const initialValues = {
 	username: '',
 	password: '',
@@ -70,6 +72,9 @@ const InputBlock = ({ onSubmit }) => {
 		</>
 	);
 };
+
+
+const storage = new AuthStorage();
 
 const SignIn = () => {
 	const [signIn] = useSignIn();
