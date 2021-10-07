@@ -6,8 +6,7 @@ const useSignIn = () => {
 	const [mutate, result] = useMutation(SIGN_IN);
 
 	const signIn = async ({ username, password }) => {
-		mutate({ variables: { username: username, password: password } })
-		console.log(result)
+		return mutate({ variables: { username: username, password: password } })
 	}
 
 	return [signIn , result]
