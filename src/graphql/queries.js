@@ -30,3 +30,11 @@ export const SIGN_IN = gql`
 	  }
   }
 `;
+
+export const AUTHORIZED_USER = gql`
+	query {
+		authorizedUser {
+			username
+		}
+	}
+`

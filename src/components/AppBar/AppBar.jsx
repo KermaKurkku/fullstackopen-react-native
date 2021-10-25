@@ -4,6 +4,9 @@ import { Link } from 'react-router-native';
 import Constants from 'expo-constants';
 
 import AppBarItem from './AppBarItem';
+import SignOut from './SignOut';
+
+import useAuthorization from '../../hooks/useAuthorization';
 
 
 import theme from '../../theme';
@@ -18,11 +21,14 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+	const { data, error, loading } = useAuthorization();
+	console.log('main', data)
 	return (
 		<View style={styles.container}>
 				<ScrollView horizontal>
 					<AppBarItem to='/'>Repositories</AppBarItem>
-					<AppBarItem to='/signIn'>Sign in</AppBarItem>
+					{data == null ? <AppBarItem to='/signIn'>Sign in</AppBarItem>
+						:	<SignOut/>}
 				</ScrollView>
 		</View>
 	);
