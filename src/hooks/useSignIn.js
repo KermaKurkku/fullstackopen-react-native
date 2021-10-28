@@ -17,9 +17,9 @@ const useSignIn = () => {
 		apolloClient.resetStore();
 		history.push('/');
 		return { data : data.authorize};
-	}
+	};
 
 	return [signIn , result];
-}
+};
 
 export default useSignIn;

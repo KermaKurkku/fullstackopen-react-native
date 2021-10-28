@@ -37,4 +37,4 @@ export const AUTHORIZED_USER = gql`
 			username
 		}
 	}
-`
+`;
