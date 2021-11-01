@@ -49,35 +49,57 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({item}) => {
 	return (
-		<View style={styles.contentWrapper}>
+		<View style={styles.contentWrapper} testID={item.id}>
 			<View style={styles.titleContainer}>
 				<Image 
 					style={styles.avatarStyle}
 					source={{ uri: item.ownerAvatarUrl}} />
 				<View style={styles.titleContainerText}>
-					<Text fontWeight='bold' style={styles.titleContainerTextItem}>{item.fullName}</Text>
-					<Text style={styles.titleContainerTextItem}>{item.description}</Text>
+					<Text 
+						fontWeight='bold' 
+						style={styles.titleContainerTextItem}
+						testID="RepositoryName"
+					>{item.fullName}</Text>
+					<Text 
+						style={styles.titleContainerTextItem}
+						testID="RepositoryDescription"
+					>{item.description}</Text>
 					<View style={styles.titleContainerTextItem}>
-						<Text style={styles.languageStyle} color='textInverted'>{item.language}</Text>
+						<Text 
+							style={styles.languageStyle} color='textInverted'
+							testID="RepositoryLanguage"
+						>{item.language}</Text>
 					</View>
 				</View>
 			</View>
 			
 			<View style={styles.voteContainer}>
 				<View style={styles.voteContainerItem}>
-					<Text fontWeight='bold'>{item.stargazersCount}</Text>
+					<Text 
+						fontWeight='bold'
+						testID="RepositoryStargazers"
+					>{item.stargazersCount}</Text>
 					<Text>Stars</Text>
 				</View>
 				<View style={styles.voteContainerItem}>
-					<Text fontWeight='bold'>{item.forksCount}</Text>
+					<Text 
+						fontWeight='bold'
+						testID="RepositoryForks"
+					>{item.forksCount}</Text>
 					<Text>Forks</Text>
 				</View>
 				<View style={styles.voteContainerItem}>
-					<Text fontWeight='bold'>{item.reviewCount}</Text>
+					<Text 
+						fontWeight='bold'
+						testID="RepositoryReviews"
+					>{item.reviewCount}</Text>
 					<Text>Reviews</Text>
 				</View>
 				<View style={styles.voteContainerItem}>
-					<Text fontWeight='bold'>{item.ratingAverage}</Text>
+					<Text 
+						fontWeight='bold'
+						testID="RepositoryRating"
+					>{item.ratingAverage}</Text>
 					<Text>Rating</Text>
 				</View>
 			</View>

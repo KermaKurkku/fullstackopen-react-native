@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
 	const { data, error, loading } = useAuthorization();
-	console.log('main', data)
 	return (
 		<View style={styles.container}>
 				<ScrollView horizontal>
