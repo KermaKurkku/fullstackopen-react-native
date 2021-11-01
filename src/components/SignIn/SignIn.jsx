@@ -3,10 +3,10 @@ import { StyleSheet, Pressable, View } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import Text from './Text';
-import { FormikTextInput } from './TextInput';
-import theme from '../theme';
-import useSignIn from '../hooks/useSignIn';
+import Text from '../Text';
+import { FormikTextInput } from '../TextInput';
+import theme from '../../theme';
+import useSignIn from '../../hooks/useSignIn';
 
 const initialValues = {
 	username: '',
@@ -48,25 +48,41 @@ const style = StyleSheet.create({
 	},
 });
 
-const InputBlock = ({ onSubmit }) => {
+export const InputBlock = ({ onSubmit }) => {
 	return (
 		<>
-			<FormikTextInput 
+			<Formik 
+				initialValues={initialValues}
+				onSubmit={onSubmit}
+				validationSchema={validationSchema}
+			>
+				{({handleSubmit}) =>
+				<>
+					<FormikTextInput 
 					name="username"
 					placeholder="Username"
+					testID="UsernameField"
 					style={style.inputStyle}
-				/>
-				<FormikTextInput
-					name="password"
-					placeholder="Password"
-					style={style.inputStyle}
-					secureTextEntry={true}
-				/>
-				<View style={style.buttonWrapper}>
-					<Pressable style={style.signInButton} onPress={onSubmit}>
-						<Text fontSize='subheading' color='textInverted' fontWeight='bold'>Sign in</Text>
-					</Pressable>
-				</View>
+					/>
+					<FormikTextInput
+						name="password"
+						placeholder="Password"
+						testID="PasswordField"
+						style={style.inputStyle}
+						secureTextEntry={true}
+					/>
+					<View style={style.buttonWrapper}>
+						<Pressable 
+							style={style.signInButton}
+							onPress={handleSubmit}
+							testID="SubmitButton"
+						>
+							<Text fontSize='subheading' color='textInverted' fontWeight='bold'>Sign in</Text>
+						</Pressable>
+					</View>
+				</>
+				}			
+			</Formik>
 		</>
 	);
 };
@@ -84,16 +100,7 @@ const SignIn = () => {
 		}
 	};
 	return (
-		<>
-			<Formik 
-				initialValues={initialValues}
-				onSubmit={onSubmit}
-				validationSchema={validationSchema}
-			>
-				{({handleSubmit}) => <InputBlock onSubmit={handleSubmit} />}			
-			</Formik>
-			
-		</>
+		<InputBlock onSubmit={onSubmit} />
 	);
 };
 

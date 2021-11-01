@@ -51,9 +51,7 @@ describe('RepositoryList', () => {
 		};
   
 		// Add your test code here
-		const { debug, getAllByTestId } = render(<RepositoryListContainer repositories={repositories} />);
-
-		debug();
+		const { getAllByTestId } = render(<RepositoryListContainer repositories={repositories} />);
 
 		const names = getAllByTestId("RepositoryName");
 		const descriptions = getAllByTestId("RepositoryDescription");
@@ -63,7 +61,7 @@ describe('RepositoryList', () => {
 		const ratingAverages = getAllByTestId("RepositoryRating");
 		const reviewCounts = getAllByTestId("RepositoryReviews");
 
-		for (i=0; i < repositories.edges.length; i++) {
+		for (let i=0; i < repositories.edges.length; i++) {
 			expect(names[i]).toHaveTextContent(repositories.edges[i].node.fullName);
 			expect(descriptions[i]).toHaveTextContent(repositories.edges[i].node.description);
 			expect(languages[i]).toHaveTextContent(repositories.edges[i].node.language);
