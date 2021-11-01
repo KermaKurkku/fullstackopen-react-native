@@ -2,6 +2,7 @@ import React from 'react';
 import { RepositoryListContainer } from './RepositoryList';
 
 import { render } from '@testing-library/react-native';
+import '@testing-library/jest-native/extend-expect';
 
 describe('RepositoryList', () => {
 	describe('RepositoryListContainer', () => {
@@ -53,6 +54,24 @@ describe('RepositoryList', () => {
 		const { debug, getAllByTestId } = render(<RepositoryListContainer repositories={repositories} />);
 
 		debug();
+
+		const names = getAllByTestId("RepositoryName");
+		const descriptions = getAllByTestId("RepositoryDescription");
+		const languages = getAllByTestId("RepositoryLanguage");
+		const forks = getAllByTestId("RepositoryForks");
+		const stargazers = getAllByTestId("RepositoryStargazers");
+		const ratingAverages = getAllByTestId("RepositoryRating");
+		const reviewCounts = getAllByTestId("RepositoryReviews");
+
+		for (i=0; i < repositories.edges.length; i++) {
+			expect(names[i]).toHaveTextContent(repositories.edges[i].node.fullName);
+			expect(descriptions[i]).toHaveTextContent(repositories.edges[i].node.description);
+			expect(languages[i]).toHaveTextContent(repositories.edges[i].node.language);
+			expect(forks[i]).toHaveTextContent(repositories.edges[i].node.forksCount);
+			expect(stargazers[i]).toHaveTextContent(repositories.edges[i].node.stargazersCount);
+			expect(ratingAverages[i]).toHaveTextContent(repositories.edges[i].node.ratingAverage);
+			expect(reviewCounts[i]).toHaveTextContent(repositories.edges[i].node.reviewCount);
+		}
 
 	  });
 	});
