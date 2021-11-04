@@ -23,6 +23,25 @@ export const GET_REPOSITORIES = gql`
 	}
 `;
 
+export const GET_REPOSITORY = gql`
+	query ($id: ID!) {
+		repository (id: $id){
+			id
+			ownerName
+			ownerAvatarUrl
+			description
+			language
+			url
+			fullName
+			ratingAverage
+			reviewCount
+			stargazersCount
+			watchersCount
+			forksCount
+		}
+	}
+`;
+
 export const SIGN_IN = gql`
 	mutation authorize($username: String!, $password: String!){
 	  authorize(credentials: { username: $username, password: $password }) {

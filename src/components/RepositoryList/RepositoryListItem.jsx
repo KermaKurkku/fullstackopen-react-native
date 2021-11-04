@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Pressable } from 'react-native';
 import Text from '../Text';
+
+import * as Linking from 'expo-linking';
 
 import theme from '../../theme';
 
@@ -9,6 +11,7 @@ const styles = StyleSheet.create({
 	contentWrapper: {
 		padding: 20,
 		backgroundColor: theme.colors.cardBack,
+		height: 'auto',
 	},
 	titleContainer: {
 		display: 'flex',
@@ -44,10 +47,21 @@ const styles = StyleSheet.create({
 	voteContainerItem: {
 		display: 'flex',
 
+	},
+	githubButton: {
+		marginTop: 10,
+		padding: 12,
+		borderRadius: 3,
+		backgroundColor: theme.colors.primary,
+		flexGrow: 1,
+		alignItems: 'center',
 	}
 });
 
-const RepositoryItem = ({item}) => {
+export const RepositoryContainer = ({item, single}) => {
+	const handleGithub = () => {
+		Linking.openURL(item.url)
+	}
 	return (
 		<View style={styles.contentWrapper} testID={item.id}>
 			<View style={styles.titleContainer}>
@@ -103,8 +117,32 @@ const RepositoryItem = ({item}) => {
 					<Text>Rating</Text>
 				</View>
 			</View>
+			{single ? 
+					<Pressable style={styles.githubButton} onPress={handleGithub}>
+						<Text
+							fontWeight={'bold'}
+							fontSize={'subheading'}
+							color={'textInverted'}
+						>
+							Open in GitHub
+						</Text>
+					</Pressable>
+					: null
+			}
 		</View>
 	);
 };
 
-export default RepositoryItem;
+const RepositoryListItem = ({item, history}) => {
+	const onRepositoryPress = () => {
+		const link = '/repository/'+item.id
+		history.push(link);
+	}
+	return (
+		<Pressable onPress={onRepositoryPress}>
+			<RepositoryContainer item={item} single={false} />
+		</Pressable>
+	);
+}
+
+export default RepositoryListItem;
