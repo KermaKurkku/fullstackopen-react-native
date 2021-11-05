@@ -21,10 +21,12 @@ export const RepositoryListContainer = ({ repositories, history }) => {
     : [];
 	return (
 		<FlatList
+			style={{ height: '85%' }}
 			data={repositoryNodes}
 			ItemSeparatorComponent={ItemSeparator}
 			renderItem={(item) => <RepositoryListItem item={item.item} history={history} />}
 			keyExtractor={repo => repo.id}
+			ListFooterComponent={<View style={{height: 10}}/>}
 		/>
 	);
 };

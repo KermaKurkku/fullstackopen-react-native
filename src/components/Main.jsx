@@ -8,7 +8,6 @@ import SignIn from './SignIn';
 import SingleRepository from './SingleRepository';
 
 const Main = () => {
-	const id = useParams();
 	return (
 		<View>
 			<AppBar/>
