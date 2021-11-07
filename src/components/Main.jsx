@@ -6,6 +6,7 @@ import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import SingleRepository from './SingleRepository';
+import ReviewForm from './ReviewForm';
 
 const Main = () => {
 	return (
@@ -20,6 +21,9 @@ const Main = () => {
 				</Route>
 				<Route path='/repository/:id'>
 					<SingleRepository />
+				</Route>
+				<Route path='/createReview'>
+					<ReviewForm />
 				</Route>
 				<Redirect to='/' />
 			</Switch>
