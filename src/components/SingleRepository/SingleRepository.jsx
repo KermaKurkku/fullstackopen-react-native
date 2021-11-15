@@ -91,7 +91,6 @@ const SingleRepository = () => {
 
 	const reviews = repository ? repository.reviews.edges.map(review => review.node)
 		: [];
-	console.log(reviews)
 	return (
 		<>
 			{repository ?	

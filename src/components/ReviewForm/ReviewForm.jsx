@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -10,7 +10,7 @@ import theme from '../../theme';
 import useCreateReview from '../../hooks/useCreateReview';
 
 const validationSchema = yup.object().shape({
-	repositoryOwner: yup
+	ownerName: yup
 		.string()
 		.required('Repository owner name is required'),
 	repositoryName: yup
@@ -28,7 +28,7 @@ const validationSchema = yup.object().shape({
 
 const initialValues = {
 	repositoryName: '',
-	repositoryOwner: '',
+	ownerName: '',
 	rating: '',
 	review: '',
 }
@@ -57,6 +57,10 @@ const style = StyleSheet.create({
 		flexGrow: 1,
 		alignSelf: 'center',
 	},
+  errorStyle: {
+    alignContent: 'center',
+    color: 'red'
+  }
 });
 
 const ReviewInputs = ({ onSubmit }) => {
@@ -70,15 +74,15 @@ const ReviewInputs = ({ onSubmit }) => {
         <>
           <FormikTextInput
             name='repositoryName'
-            placeholder='Repository owner name'
-            style={style.inputStyle}
-            testID='RepoOwnerField'
-          />
-          <FormikTextInput
-            name='repositoryOwner'
             placeholder='Repository name'
             style={style.inputStyle}
-            testID="RepoNameField"
+            testID='RepoNameField'
+          />
+          <FormikTextInput
+            name='ownerName'
+            placeholder='Repository owner name'
+            style={style.inputStyle}
+            testID="RepoOwnerField"
           />
           <FormikTextInput
             name='rating'
@@ -112,21 +116,28 @@ const ReviewInputs = ({ onSubmit }) => {
 
 const ReviewForm = () => {
 	const [createReview] = useCreateReview();
+  const [errorMessage, setErrorMessage] = useState(null)
 
 	const onSubmit = async (values) => {
-		const { repositoryName, repositoryOwner, rating, review } = values;
+		const { repositoryName, ownerName, rating, review } = values;
 
 		try {
-			const { data } = await createReview({
-				repositoryName, repositoryOwner, rating, review
+			await createReview({
+				repositoryName, ownerName, rating, text: review
 			});
-			console.log(data)
 		} catch (e) {
-			console.log('Error', e)
+			console.log(JSON.stringify(e, null,2))
+      setErrorMessage(e.message)
+      setTimeout(() => setErrorMessage(null), 5000);
 		}
-	}
+	};
 
-	return ( <ReviewInputs onSubmit={onSubmit} />)
+	return ( 
+    <>
+      <Text style={style.errorStyle}>{errorMessage}</Text>
+		  <ReviewInputs onSubmit={onSubmit} />
+    </>
+	)
 }
 
 export default ReviewForm;

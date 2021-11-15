@@ -9,11 +9,12 @@ const useCreateReview = () => {
 	const [mutate, result] = useMutation(CREATE_REVIEW);
 
 	const createReview = async ({ repositoryName, ownerName, rating, text }) => {
-		console.log('yeet')
 		const { data, error, loading } = await mutate({ variables: { 
-			repositoryName: repositoryName, ownerName, rating: rating, text: text
-		}})
-		console.log(data)
+			repositoryName, ownerName: ownerName, rating: Number(rating), text: text
+		}});
+		
+		if (data)
+      history.push('/repository/'+data.createReview.repositoryId)
 
 		return {data, error}
 	}
