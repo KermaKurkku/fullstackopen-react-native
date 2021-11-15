@@ -7,11 +7,13 @@ import Text from '../Text';
 import { FormikTextInput } from '../TextInput';
 import theme from '../../theme';
 
+import useCreateReview from '../../hooks/useCreateReview';
+
 const validationSchema = yup.object().shape({
-	repoOwner: yup
+	repositoryOwner: yup
 		.string()
 		.required('Repository owner name is required'),
-	repoName: yup
+	repositoryName: yup
 		.string()
 		.required('Repository name is required'),
 	rating: yup
@@ -22,7 +24,14 @@ const validationSchema = yup.object().shape({
 	review: yup
 		.string()
 	
-})
+});
+
+const initialValues = {
+	repositoryName: '',
+	repositoryOwner: '',
+	rating: '',
+	review: '',
+}
 
 const style = StyleSheet.create({
 	inputStyle: {
@@ -50,39 +59,45 @@ const style = StyleSheet.create({
 	},
 });
 
-const ReviewForm = () => {
+const ReviewInputs = ({ onSubmit }) => {
 	return (
 		<Formik
       validationSchema={validationSchema}
+			initialValues={initialValues}
+			onSubmit={onSubmit}
     >
       {({handleSubmit}) => 
         <>
           <FormikTextInput
-            name='RepositoryOwner'
+            name='repositoryName'
             placeholder='Repository owner name'
             style={style.inputStyle}
             testID='RepoOwnerField'
           />
           <FormikTextInput
-            name='RepositoryName'
+            name='repositoryOwner'
             placeholder='Repository name'
             style={style.inputStyle}
             testID="RepoNameField"
           />
           <FormikTextInput
-            name='Rating'
+            name='rating'
             placeholder='Rating between 0 and 100'
             style={style.inputStyle}
             testID='RatingField'
           />
           <FormikTextInput
-            name='Review'
+            name='review'
             placeholder='Review'
             style={style.inputStyle}
+						multiline={true}
             testID='ReviewField'
           />
           <View style={style.buttonWrapper}>
-            <Pressable style={style.createReviewButton}>
+            <Pressable 
+							style={style.createReviewButton}
+							onPress={handleSubmit}
+						>
               <Text
                 fontWeight='bold'
                 color='textInverted'
@@ -94,5 +109,24 @@ const ReviewForm = () => {
     </Formik>
 	);
 };
+
+const ReviewForm = () => {
+	const [createReview] = useCreateReview();
+
+	const onSubmit = async (values) => {
+		const { repositoryName, repositoryOwner, rating, review } = values;
+
+		try {
+			const { data } = await createReview({
+				repositoryName, repositoryOwner, rating, review
+			});
+			console.log(data)
+		} catch (e) {
+			console.log('Error', e)
+		}
+	}
+
+	return ( <ReviewInputs onSubmit={onSubmit} />)
+}
 
 export default ReviewForm;

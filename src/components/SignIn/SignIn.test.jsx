@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 
-import { InputBlock } from './SignIn';
+import { SignInInputs } from './SignIn';
 
 describe('SignIn', () => {
   describe('SignInContainer', () => {
     it('calls onSubmit function with correct arguments when a valid form is submitted', async () => {
       // render the SignInContainer component, fill the text inputs and press the submit button
 			const onSubmit = jest.fn();
-			const { getByTestId } = render(<InputBlock onSubmit={onSubmit} />)
+			const { getByTestId } = render(<SignInInputs onSubmit={onSubmit} />)
 
 			const usernameField = getByTestId("UsernameField");
 			const passwordField = getByTestId("PasswordField");

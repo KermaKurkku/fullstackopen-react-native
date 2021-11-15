@@ -48,7 +48,7 @@ const style = StyleSheet.create({
 	},
 });
 
-export const InputBlock = ({ onSubmit }) => {
+export const SignInInputs = ({ onSubmit }) => {
 	return (
 		<>
 			<Formik 
@@ -100,7 +100,7 @@ const SignIn = () => {
 		}
 	};
 	return (
-		<InputBlock onSubmit={onSubmit} />
+		<SignInInputs onSubmit={onSubmit} />
 	);
 };
 
