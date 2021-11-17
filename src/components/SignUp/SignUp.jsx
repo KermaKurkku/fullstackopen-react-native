@@ -127,7 +127,7 @@ const SignUp = () => {
     }
 
     try {
-      const {data} = await createUser({ username, password});
+      await createUser({ username, password});
     } catch (e) {
       setError(e.message);
       setTimeout(() => setError(null), 5000);
