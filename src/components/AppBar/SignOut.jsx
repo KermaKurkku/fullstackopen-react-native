@@ -3,6 +3,7 @@ import { Pressable } from 'react-native';
 import useSignOut from '../../hooks/useSignOut';
 import { StyleSheet } from 'react-native';
 
+
 import Text from '../Text';
 
 const style = StyleSheet.create({
@@ -18,7 +19,7 @@ const SignOut = () => {
 
 	const onPressFunc = () => {
 		console.log('pressed')
-		signOut();	
+		signOut();
 	}
 
 	return (

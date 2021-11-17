@@ -1,7 +1,7 @@
 import { useApolloClient, useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-native';
 
-import { SIGN_IN } from '../graphql/queries';
+import { SIGN_IN } from '../graphql/mutations';
 
 import useAuthStorage from './useAuthStorage';
 

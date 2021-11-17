@@ -26,7 +26,7 @@ const AppBar = () => {
 		<View style={styles.container}>
 				<ScrollView horizontal>
 					<AppBarItem to='/'>Repositories</AppBarItem>
-					{data == null ? null : <AppBarItem to='/createReview'>Create a review</AppBarItem>}
+					{data == null ? <AppBarItem to='/signUp'>Sign up</AppBarItem> : <AppBarItem to='/createReview'>Create a review</AppBarItem>}
 					{data == null ? <AppBarItem to='/signIn'>Sign in</AppBarItem>
 						:	<SignOut/>}
 				</ScrollView>

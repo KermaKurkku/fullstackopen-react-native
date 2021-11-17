@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-native';
 
-import { CREATE_REVIEW } from '../graphql/queries';
+import { CREATE_REVIEW } from '../graphql/mutations';
 
 const useCreateReview = () => {
 	const history = useHistory();
@@ -14,9 +14,9 @@ const useCreateReview = () => {
 		}});
 		
 		if (data)
-      history.push('/repository/'+data.createReview.repositoryId)
+      		history.push('/repository/'+data.createReview.repositoryId);
 
-		return {data, error}
+		return {data, error};
 	}
 
 	return [createReview, result]

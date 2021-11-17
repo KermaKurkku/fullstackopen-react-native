@@ -57,10 +57,17 @@ const style = StyleSheet.create({
 		flexGrow: 1,
 		alignSelf: 'center',
 	},
-  errorStyle: {
-    alignContent: 'center',
-    color: 'red'
-  }
+  errorWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 2
+  },
+	errorStyle: {
+		alignContent: 'center',
+		color: 'red'
+	}
 });
 
 const ReviewInputs = ({ onSubmit }) => {
@@ -116,7 +123,7 @@ const ReviewInputs = ({ onSubmit }) => {
 
 const ReviewForm = () => {
 	const [createReview] = useCreateReview();
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [error, setError] = useState(null);
 
 	const onSubmit = async (values) => {
 		const { repositoryName, ownerName, rating, review } = values;
@@ -127,14 +134,19 @@ const ReviewForm = () => {
 			});
 		} catch (e) {
 			console.log(JSON.stringify(e, null,2))
-      setErrorMessage(e.message)
-      setTimeout(() => setErrorMessage(null), 5000);
+      setError(e.message)
+      setTimeout(() => setError(null), 5000);
 		}
 	};
 
 	return ( 
     <>
-      <Text style={style.errorStyle}>{errorMessage}</Text>
+      {error ?
+        <View style={style.errorWrapper}>
+          <Text style={style.errorStyle}>{error}</Text>
+        </View>
+        : null
+      }
 		  <ReviewInputs onSubmit={onSubmit} />
     </>
 	)
