@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { FlatList, View, StyleSheet, Pressable } from 'react-native';
-import { Menu, Provider, Button } from 'react-native-paper';
+import React, { useState, useRef } from 'react';
+import { FlatList, View, StyleSheet } from 'react-native';
+import { Picker } from 'react-native';
 import theme from '../../theme';
 import RepositoryListItem from './RepositoryListItem';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -10,6 +10,7 @@ import Text from '../Text';
 
 import { useHistory } from 'react-router-native';
 import useRepositories from '../../hooks/useRepositories';
+import { setIn } from 'formik';
 
 const styles = StyleSheet.create({
   mainBack: {
@@ -21,15 +22,18 @@ const styles = StyleSheet.create({
 	},
   sortMenuWrapper: {
     display: 'flex',
+    flexGrow: 0,
     justifyContent: 'center',
     backgroundColor: theme.colors.cardBack,
+    margin: 10,
   },
   sortMenuButtonWrapper: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 10,
+    justifyContent: 'center',
+    padding: 20,
   },
 });
 
@@ -37,43 +41,11 @@ export const ItemSeparator = () => <View style={styles.separator} />;
 
 
 
-export const RepositoryListContainer = ({ repositories, history }) => {
-  const [sort, setSort] = useState('CREATED_AT');
+export const RepositoryListContainer = ({ repositories, history, SortMenu}) => {
 	const repositoryNodes = repositories
 		? repositories.edges.map(edge => edge.node)
     : [];
   
-  const SortMenu = () => {
-    const [visible, setVisible] = useState(false);
-    const openMenu = () => {setVisible(true); console.log(visible) }
-    const closeMenu = () => {setVisible(false); console.log(visible)}
-    return (
-      <Provider>
-         <View>
-          <Menu 
-              visible={visible}
-              onDismiss={closeMenu}
-              contentStyle={{
-                backgroundColor: 'red'
-              }}
-              anchor={
-                <>
-                  <Pressable onPress={openMenu} style={styles.sortMenuButtonWrapper}>
-                    <Text fontSize='subheading'>Latest repositories</Text>
-                    <FontAwesomeIcon icon={faCaretDown} style={styles.icon} /> 
-                  </Pressable>
-                </>
-              }
-            >
-              <Menu.Item style={{backgroundColor: 'green'}}
-              onPress={() => console.log('test1')} title='test1' />
-              <Menu.Item onPress={() => console.log('Test2')} title='test2' />
-
-            </Menu>
-         </View>
-      </Provider>
-    )
-  }
 	return (
     <View style={styles.mainBack}>
 		  <FlatList
@@ -90,10 +62,35 @@ export const RepositoryListContainer = ({ repositories, history }) => {
 };
 
 const RepositoryList= () => {
-	const { repositories } = useRepositories();
+  const [sort, setSort] = useState('CREATED_AT:DESC');
+
+  const sortMethod = sort.split(':')
+	const { repositories } = useRepositories({
+    orderBy: sortMethod[0],
+    orderDirection: sortMethod[1]
+  });
 	const history = useHistory();
 
-	return <RepositoryListContainer repositories={repositories} history={history} />;
+  const SortMenu = () => {
+    return (
+      <View style={styles.sortMenuWrapper}>
+        <Picker
+          selectedValue={sort}
+          onValueChange={(itemValue, itemIndex) =>
+            setSort(itemValue)
+          }
+          mode={'dialog'}
+          prompt='Select an item...'
+        >
+          <Picker.Item label='Latest repositories' value={'CREATED_AT:DESC'} />
+          <Picker.Item label='Highest rated repositories' value={'RATING_AVERAGE:DESC'} />
+          <Picker.Item label='Lowest rated repositories' value={'RATING_AVERAGE:ASC'} />
+        </Picker>
+      </View>
+    )
+  }
+
+	return <RepositoryListContainer repositories={repositories} history={history} SortMenu={SortMenu} />;
 };
 
 export default RepositoryList;
