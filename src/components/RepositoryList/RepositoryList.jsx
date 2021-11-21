@@ -62,7 +62,7 @@ export const ItemSeparator = () => <View style={styles.separator} />;
 
 
 
-export const RepositoryListContainer = ({ repositories, setFilter, setSort}) => {
+export const RepositoryListContainer = ({ repositories, onEndReach, setFilter, setSort}) => {
   const history = useHistory();
 	const repositoryNodes = repositories
 		? repositories.edges.map(edge => edge.node)
@@ -72,12 +72,13 @@ export const RepositoryListContainer = ({ repositories, setFilter, setSort}) => 
     <View style={styles.mainBack}>
 		  <FlatList
         ListHeaderComponent={<SearchMenu setFilter={setFilter} setSort={setSort} />}
-		  	style={{ height: '85%' }}
+		  	style={{ height: '90%' }}
 		  	data={repositoryNodes}
 		  	ItemSeparatorComponent={ItemSeparator}
 		  	renderItem={(item) => <RepositoryListItem item={item.item} history={history} />}
 		  	keyExtractor={repo => repo.id}
-		  	ListFooterComponent={<View style={{height: 10}}/>}
+				onEndReached={() => onEndReach()}
+				onEndReachedThreshold={0.2}
 		  />
     </View>
 	);
@@ -131,13 +132,19 @@ const RepositoryList= () => {
   const [filter, setFilter] = useState('');
   
   const sortMethod = sort.split(':')
-	const { repositories } = useRepositories({
+	const { repositories, fetchMore } = useRepositories({
     orderBy: sortMethod[0],
     orderDirection: sortMethod[1],
-    searchKeyword: filter
+    searchKeyword: filter,
+		first: 5,
   });
 
-	return <RepositoryListContainer repositories={repositories} setFilter={setFilter} setSort={setSort} />;
+	const onEndReach = () => {
+		console.log('You have reached the end of the list');
+		fetchMore();
+	}
+
+	return <RepositoryListContainer repositories={repositories} onEndReach={onEndReach} setFilter={setFilter} setSort={setSort} />;
 };
 
 export default RepositoryList;

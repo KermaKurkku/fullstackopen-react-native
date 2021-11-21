@@ -18,7 +18,6 @@ const SignOut = () => {
 	const [signOut] = useSignOut();
 
 	const onPressFunc = () => {
-		console.log('pressed')
 		signOut();
 	}
 
