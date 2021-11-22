@@ -80,9 +80,32 @@ export const GET_REPOSITORY = gql`
 `;
 
 export const AUTHORIZED_USER = gql`
-	query {
-		authorizedUser {
-			username
-		}
-	}
+  query ($includeReviews: Boolean = false, $first: Int, $after: String){
+    authorizedUser {
+      username
+      reviews (first: $first after: $after) @include(if: $includeReviews){
+        edges {
+          node {
+            id
+            repositoryId
+            repository {
+              name
+            }
+            user {
+              username
+            }
+            text
+            rating
+            createdAt
+          }
+        }
+        pageInfo {
+          hasNextPage
+          startCursor
+          endCursor
+        }
+      }
+      reviewCount
+    }
+  }
 `;

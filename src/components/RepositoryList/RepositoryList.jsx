@@ -78,7 +78,7 @@ export const RepositoryListContainer = ({ repositories, onEndReach, setFilter, s
 		  	renderItem={(item) => <RepositoryListItem item={item.item} history={history} />}
 		  	keyExtractor={repo => repo.id}
 				onEndReached={() => onEndReach()}
-				onEndReachedThreshold={0.5}
+				onEndReachedThreshold={1}
 		  />
     </View>
 	);

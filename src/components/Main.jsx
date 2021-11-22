@@ -8,6 +8,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import SingleRepository from './SingleRepository';
 import ReviewForm from './ReviewForm';
+import MyReviews from './MyReviews';
 
 const Main = () => {
 	return (
@@ -28,6 +29,9 @@ const Main = () => {
 				</Route>
 				<Route path='/createReview' exact>
 					<ReviewForm />
+				</Route>
+				<Route path='/myReviews' exact>
+					<MyReviews />
 				</Route>
 				<Redirect to='/' />
 			</Switch>
