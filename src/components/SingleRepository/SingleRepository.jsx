@@ -85,11 +85,8 @@ const reviewComponent = ({ item }) => {
 	)
 }
 
-const SingleRepository = () => {
-	const {id} = useParams();
-	const { repository } = useRepository(id);
-
-	const reviews = repository ? repository.reviews.edges.map(review => review.node)
+const SingleRepositoryContainer = ({ repository, onEndReach }) => {
+  const reviews = repository ? repository.reviews.edges.map(review => review.node)
 		: [];
 	return (
 		<>
@@ -103,11 +100,29 @@ const SingleRepository = () => {
 					keyExtractor={item => item.id}
           ListHeaderComponent={ItemSeparator}
           ListFooterComponent={ItemSeparator}
+          onEndReached={() => onEndReach()}
+          onEndReachedThreshold={0.2}
 				/>
 			</View>
 				: null }
 		</>
 	);
+}
+
+const SingleRepository = () => {
+	const {id} = useParams();
+	const { repository, fetchMore } = useRepository({
+    id,
+    first: 3,
+  });
+
+  const onEndReach = () => {
+    fetchMore();
+  }
+
+	return (
+    <SingleRepositoryContainer repository={repository} onEndReach={onEndReach} />
+  )
 };
 
 export default SingleRepository;

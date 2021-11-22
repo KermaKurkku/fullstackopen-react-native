@@ -78,7 +78,7 @@ export const RepositoryListContainer = ({ repositories, onEndReach, setFilter, s
 		  	renderItem={(item) => <RepositoryListItem item={item.item} history={history} />}
 		  	keyExtractor={repo => repo.id}
 				onEndReached={() => onEndReach()}
-				onEndReachedThreshold={0.2}
+				onEndReachedThreshold={0.5}
 		  />
     </View>
 	);
@@ -140,7 +140,6 @@ const RepositoryList= () => {
   });
 
 	const onEndReach = () => {
-		console.log('You have reached the end of the list');
 		fetchMore();
 	}
 

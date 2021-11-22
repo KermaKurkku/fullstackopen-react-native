@@ -42,36 +42,41 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_REPOSITORY = gql`
-	query ($id: ID!) {
-		repository (id: $id){
-			id
-			ownerName
-			ownerAvatarUrl
-			description
-			language
-			url
-			fullName
-			ratingAverage
-			reviewCount
-			stargazersCount
-			watchersCount
-			forksCount
-			reviews {
-				edges {
-					node {
-						id
-						text
-						rating
-						createdAt
-						user {
-							id
-							username
-						}
-					}
-				}
-			}
-		}
-	}
+  query ($id: ID!, $first: Int, $after: String) {
+    repository (id: $id){
+      id
+      ownerName
+      ownerAvatarUrl
+      description
+      language
+      url
+      fullName
+      ratingAverage
+      reviewCount
+      stargazersCount
+      watchersCount
+      forksCount
+      reviews (first: $first after: $after) {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      pageInfo {
+        hasNextPage
+        startCursor
+        endCursor
+      }
+      }
+    }
+  }
 `;
 
 export const AUTHORIZED_USER = gql`
