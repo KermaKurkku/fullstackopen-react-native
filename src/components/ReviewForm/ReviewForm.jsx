@@ -31,7 +31,7 @@ const initialValues = {
 	ownerName: '',
 	rating: '',
 	review: '',
-}
+};
 
 const style = StyleSheet.create({
 	inputStyle: {
@@ -133,8 +133,8 @@ const ReviewForm = () => {
 				repositoryName, ownerName, rating, text: review
 			});
 		} catch (e) {
-			console.log(JSON.stringify(e, null,2))
-      setError(e.message)
+			console.log(JSON.stringify(e, null,2));
+      setError(e.message);
       setTimeout(() => setError(null), 5000);
 		}
 	};
@@ -147,9 +147,9 @@ const ReviewForm = () => {
         </View>
         : null
       }
-		  <ReviewInputs onSubmit={onSubmit} />
+			<ReviewInputs onSubmit={onSubmit} />
     </>
-	)
-}
+	);
+};
 
 export default ReviewForm;

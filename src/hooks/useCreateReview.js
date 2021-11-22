@@ -14,12 +14,12 @@ const useCreateReview = () => {
 		}});
 		
 		if (data)
-      		history.push('/repository/'+data.createReview.repositoryId);
+			history.push('/repository/'+data.createReview.repositoryId);
 
 		return {data, error};
-	}
+	};
 
-	return [createReview, result]
+	return [createReview, result];
 };
 
 export default useCreateReview;

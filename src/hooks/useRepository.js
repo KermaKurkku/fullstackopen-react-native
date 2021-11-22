@@ -27,7 +27,7 @@ const useRepository = (variables) => {
     fetchMore: handleFetchMore,
     loading,
     ...result
-  }
+  };
 };
 
 export default useRepository;

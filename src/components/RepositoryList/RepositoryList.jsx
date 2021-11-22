@@ -7,11 +7,9 @@ import RepositoryListItem from './RepositoryListItem';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import Text from '../Text';
 
 import { useHistory } from 'react-router-native';
 import useRepositories from '../../hooks/useRepositories';
-import { setIn } from 'formik';
 import { TextInput } from '../TextInput';
 
 const styles = StyleSheet.create({
@@ -47,7 +45,6 @@ const styles = StyleSheet.create({
   SearchMenuButtonWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
@@ -70,16 +67,16 @@ export const RepositoryListContainer = ({ repositories, onEndReach, setFilter, s
   
 	return (
     <View style={styles.mainBack}>
-		  <FlatList
+			<FlatList
         ListHeaderComponent={<SearchMenu setFilter={setFilter} setSort={setSort} />}
-		  	style={{ height: '90%' }}
-		  	data={repositoryNodes}
-		  	ItemSeparatorComponent={ItemSeparator}
-		  	renderItem={(item) => <RepositoryListItem item={item.item} history={history} />}
-		  	keyExtractor={repo => repo.id}
+				style={{ height: '90%' }}
+				data={repositoryNodes}
+				ItemSeparatorComponent={ItemSeparator}
+				renderItem={(item) => <RepositoryListItem item={item.item} history={history} />}
+				keyExtractor={repo => repo.id}
 				onEndReached={() => onEndReach()}
 				onEndReachedThreshold={1}
-		  />
+			/>
     </View>
 	);
 };
@@ -90,8 +87,8 @@ const SearchMenu = ({ setFilter, setSort }) => {
   const [debounced] = useDebounce(text, 500);
 
   useEffect(() => {
-    setFilter(debounced)
-  }, [debounced])
+    setFilter(debounced);
+  }, [debounced]);
 
   return (
     <View style={styles.SearchMenuWrapper}>
@@ -124,14 +121,14 @@ const SearchMenu = ({ setFilter, setSort }) => {
         <Picker.Item label='Lowest rated repositories' value={'RATING_AVERAGE:ASC'} />
       </Picker>
     </View>
-  )
-}
+  );
+};
 
 const RepositoryList= () => {
   const [sort, setSort] = useState('CREATED_AT:DESC');
   const [filter, setFilter] = useState('');
   
-  const sortMethod = sort.split(':')
+  const sortMethod = sort.split(':');
 	const { repositories, fetchMore } = useRepositories({
     orderBy: sortMethod[0],
     orderDirection: sortMethod[1],
@@ -141,7 +138,7 @@ const RepositoryList= () => {
 
 	const onEndReach = () => {
 		fetchMore();
-	}
+	};
 
 	return <RepositoryListContainer repositories={repositories} onEndReach={onEndReach} setFilter={setFilter} setSort={setSort} />;
 };

@@ -27,22 +27,22 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30
   }
-})
+});
 
 const SingleReview = ({ item, title, history, deleteReview, refetch }) => {
   const onViewButtonPress = () => {
-    history.push('/repository/'+item.repositoryId)
-  }
+    history.push('/repository/'+item.repositoryId);
+  };
 
   const confirmedDelete = async () => {
-    console.log(item)
+    console.log(item);
     try {
       await deleteReview({ id: item.id });
       refetch();
     } catch (e) {
-      console.log(e.message)
+      console.log(e.message);
     }
-  }
+  };
 
   const onDeleteButtonPress = () => {
     Alert.alert(
@@ -59,7 +59,7 @@ const SingleReview = ({ item, title, history, deleteReview, refetch }) => {
         }
       ]
     );
-  }
+  };
 
   return (
     <>
@@ -91,8 +91,8 @@ const SingleReview = ({ item, title, history, deleteReview, refetch }) => {
         </Pressable>
       </View>
     </>
-  )
-}
+  );
+};
 
 const MyReviewsContainer = ({ data, onEndReach, deleteReview, refetch }) => {
   const reviews = data ? data.reviews.edges.map(review => review.node)
@@ -120,7 +120,7 @@ const MyReviewsContainer = ({ data, onEndReach, deleteReview, refetch }) => {
 		/>
 	);
 
-}
+};
 
 const MyReviews = () => {
 	const { data, fetchMore, refetch } = useAuthorization({
@@ -132,11 +132,11 @@ const MyReviews = () => {
   
   const onEndReach = () => {
     fetchMore();
-  }
+  };
 
   return (
     <MyReviewsContainer data={data} onEndReach={onEndReach} deleteReview={deleteReview} refetch={refetch} />
-  )
-}
+  );
+};
 
-export default MyReviews
+export default MyReviews;

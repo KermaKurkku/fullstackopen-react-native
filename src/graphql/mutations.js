@@ -48,4 +48,4 @@ export const DELETE_REVIEW = gql`
 mutation ($id: ID!) {
 	deleteReview(id: $id)
   }
-`
+`;

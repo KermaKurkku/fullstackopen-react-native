@@ -39,14 +39,14 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginTop: 5,
-  }
-})
+  },
+});
 
 
 const ReviewComponent = ({ item, title }) => {
 	const date = item
-	  ? new Date(item.createdAt)
-	  : null;
+		? new Date(item.createdAt)
+		: null;
   
   return (
     <View style={styles.cardStyle}>

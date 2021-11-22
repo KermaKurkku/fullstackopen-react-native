@@ -8,7 +8,7 @@ const useCreateUser = () => {
 	const [mutate, result] = useMutation(CREATE_USER);
 
 	const createUser = async ({ username, password }) => {
-		const { data, error, loading } = await mutate({ variables: {
+		const { data, error } = await mutate({ variables: {
 			username, password
 		}});
 
@@ -16,9 +16,9 @@ const useCreateUser = () => {
 			history.push('/');
 
 		return {data, error};
-	}
+	};
   
   return [createUser, result];
-}
+};
 
 export default useCreateUser;

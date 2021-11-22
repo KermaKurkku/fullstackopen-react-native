@@ -12,23 +12,23 @@ const useRepositories = (variables) => {
 		const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage;
 	
 		if (!canFetchMore) {
-		  return;
+			return;
 		}
 	
 		fetchMore({
-		  variables: {
+			variables: {
 			after: data.repositories.pageInfo.endCursor,
 			...variables,
-		  },
+			},
 		});
-	  };
+		};
 	
-	  return {
-		repositories: data?.repositories,
-		fetchMore: handleFetchMore,
-		loading,
-		...result,
-	  };
+		return {
+			repositories: data?.repositories,
+			fetchMore: handleFetchMore,
+			loading,
+			...result,
+		};
 };
 
 export default useRepositories;

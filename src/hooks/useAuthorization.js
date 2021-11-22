@@ -9,7 +9,7 @@ const useAuthorization = (variables) => {
 	});
 
 	const handleFetchMore = () => {
-		const canFetchMore = !loading && data?.authorizedUser.reviews.pageInfo.hasNextPage
+		const canFetchMore = !loading && data?.authorizedUser.reviews.pageInfo.hasNextPage;
 
 		if (!canFetchMore)
 			return;
@@ -18,9 +18,9 @@ const useAuthorization = (variables) => {
 			variables: {
         after: data.authorizedUser.reviews.pageInfo.endCursor,
         ...variables
-      }
-		})
-	}
+      },
+		});
+	};
 	
 	return {
     data: data?.authorizedUser,

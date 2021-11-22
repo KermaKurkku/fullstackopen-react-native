@@ -19,7 +19,7 @@ const SignOut = () => {
 
 	const onPressFunc = () => {
 		signOut();
-	}
+	};
 
 	return (
 		<Pressable onPress={onPressFunc} style={style.item}>
@@ -27,7 +27,7 @@ const SignOut = () => {
 				Sign out
 			</Text>
 		</Pressable>
-	)
-}
+	);
+};
 
 export default SignOut;
