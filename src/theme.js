@@ -6,6 +6,7 @@ const theme = {
     textSecondary: '#586069',
     textInverted: '#FFFFFF',
     primary: '#0366d6',
+    error: '#D6394C',
     appBar: '#24292e',
 		cardBack: '#FFFFFF',
 		separatorBack: '#E1E4E8'
